@@ -5,17 +5,7 @@ from time import sleep
 from subprocess import run
 from gpiozero import CPUTemperature
 
-
-init_values = {
-    "imageWidth" : 640,
-    "imageHeight" : 480,
-    "imageResolutionX" : 2592,  #(2592,1944) (1920,1080)
-    "imageResolutionY" : 1944,
-    "imageFormat" : '.jpg',
-    "imageFrameRate" : 10,
-    "statusInterval" : 720 
-}
-
+##import vakues from device_info file
 
 def capture_image():
     print("Camera Opening")
@@ -104,15 +94,18 @@ def change_image_format(image_format = '.jpg'):
     init_values["imageFormat"] = image_format
     return init_values.get("imageFormat")
 
+def publish_data():
+    cpu = gpz.CPUTemperature()
+        device_value = commands.Device(##put info from device_info value here)
+        print("SensorData Published")
+    # publish client event data using IBM Watson IoT PY SDK
+        client.publishEvent("status","json", device_value.__dict__)
+
 
 class Device:
-    def __init__(self, device_ID, device_status, latitude, Longtitude, water_stress_level = 0, cpu_temperature = CPUTemperature, date_1 = datetime.datetime.now().strftime("%d_%m_%y"), time_1 = datetime.datetime.now().strftime("%H_%M_%S")):
+    def __init__(self, device_ID, device_status, latitude, Longtitude):
         self.DEVICE_ID = device_ID
         self.DEVICE_STATUS = device_status
         self.LATITUDE = latitude
         self.LONGITUDE = Longtitude
-        self.WATER_STRESS_LEVEL = water_stress_level
-        self.CPU_TEMPERATURE = cpu_temperature
-        self.DATE_1 = date_1
-        self.TIME_1 = time_1
 
