@@ -9,8 +9,7 @@ from sys import path
 path.append("/home/pi/.local/lib/python3.7/site-packages")
 path.append("/home/pi")
 
-def ml_process(street):
-    i=0 # setting i to be the counter referencing most recent picture
+def ml_process(street,i):
     #im = imread('/home/pi/images/'+currDate+currTime+imageFormat)
     #Uncomment the above line to use the ML model on the taken image
     file = '/home/pi/Pictures/' + street[i] # set 'file' to image directory
@@ -49,3 +48,4 @@ def ml_process(street):
     i= i+1 #Score next image
     print("Water Stress Level", waterStressLevel)
     print("Percent Confident", '%.2f' % percentConfident)
+    return waterStressLevel

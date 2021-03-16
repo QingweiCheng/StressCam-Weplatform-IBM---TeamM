@@ -1,8 +1,8 @@
 {
     "device_info":{
         "deviceId" : "0001",
-        "cameraLatitude" : 35.763886,
-        "cameraLongitude" : -78.718038,
+        "cameraLatitude" : "35.763886",
+        "cameraLongitude" : "-78.718038",
         "statusInterval" : 720   
     },
 

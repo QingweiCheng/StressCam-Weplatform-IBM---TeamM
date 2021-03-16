@@ -5,10 +5,13 @@ import json
 def network_connect():
     run("sudo hologram network connect", shell=True)
     credentials ={'devicekey':'a_jbDNcZ'}
-    hologram = HologramCloud(credentials, network='cellular',authentication_type='csrpsk')
+    return HologramCloud(credentials, network='cellular',authentication_type='csrpsk') #return cloud routing credentials
 
 def network_disconnect():
     run("sudo hologram network disconnect", shell=True)
 
-def message_publish(data):
+def message_publish(hologram,data):
     formatted_data  = json.dumps(data, seperator=(" ", ":"))
+    recv=hologram.senMessage(formatted_data)
+    print("Recieved Code:", recv)
+    print("0 Means Succesful Transmission")

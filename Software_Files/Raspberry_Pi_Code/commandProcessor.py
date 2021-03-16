@@ -1,6 +1,5 @@
-from gpiozero.devices import Device
 import commands
-import wiotp.sdk.device
+import datetime
 
 def commandProcessor(cmd):
 
@@ -9,18 +8,21 @@ def commandProcessor(cmd):
     # print recieved command
     print("Command received: %s" % command)
 
-    if(command == "changeResolution"):
-        commands.change_resolution(int(cmd.data['imageResolutionX']), int(cmd.data['imageResolutionY']))
-
-    # if command is take image
+   # if command is take image
     if command == "takeImage":
-        commands.capture_image()
+        currDate = datetime.datetime.now().strftime("%d_%m_%y")
+       	currTime = datetime.datetime.now().strftime("%H_%M_%S")
+        commands.capture_image(currDate,currTime)
 
     # if command is resize image
     if command == "resizeImage" and int(cmd.data['Height'])<=1944 and int(cmd.data['Width'])<=2592:
         commands.resize_image(int(cmd.data['Height']), int(cmd.data['Width']))
     else:
         print("Images not resized, size too large")
+
+    #if command is to change resolution
+    if(command == "changeResolution"):
+        commands.change_resolution(int(cmd.data['imageResolutionX']), int(cmd.data['imageResolutionY']))
 
     # if command is change send interval
     # Web page shows button to change status update interval value in minuits 
@@ -44,11 +46,10 @@ def commandProcessor(cmd):
 
     # if command is change frames
     if(command == "changeFrames"):
-        int(cmd.data['frames'])
-        print("Frame Rate changed to:", int(cmd.data['frames'])#range(10fps-30fps)
+        commands.change_frame_rate(int(cmd.data['frames']))
+        print("Frame Rate changed to:", int(cmd.data['frames']))#range(10fps-30fps)
 
     # if command is send data
     if(command == "sendData"):
-        command.publish_data()
-
+        commands.publish_data()
         
