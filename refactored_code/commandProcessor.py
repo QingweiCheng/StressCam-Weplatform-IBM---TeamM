@@ -3,7 +3,7 @@ import datetime
 
 def commandProcessor(cmd):
 
-    command = cmd.data.get['CommandType']
+    command = cmd.data['CommandType']
 
     # print recieved command
     print("Command received: %s" % command)

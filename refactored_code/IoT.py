@@ -35,6 +35,8 @@ import gpiozero as gpz
 
 from uuid import getnode as get_mac
 
+hologram = hologram_commands.network_connect()
+
 try:
     from wiotp.sdk.device import DeviceClient #changed from import wiotp.sdk.device
 except ImportError:
@@ -59,13 +61,13 @@ def interruptHandler(signal, frame):
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, interruptHandler)
 
-    with open('home/pi/device_info.json') as f:
+    with open('/home/pi/device_info.json') as f:
         data = json.load(f)
     f.close()
 
     client = None
     try:
-        client = wiotp.sdk.device.DeviceClient(data['wiotp_info']) # create a client using preset values
+        client = DeviceClient(data['wiotp_info']) # create a client using preset values
         client.commandCallback = commandProcessor # set commandCallback to commandProcessor  
         client.connect() # Use MQTT connection to IBM Watson IoT Plateform for publishing events
     except Exception as e:         # store error message in 'e'
@@ -73,7 +75,7 @@ if __name__ == "__main__":
         exit(1)         # issue occured, program exit
     print("(Press Ctrl+C to disconnect)")
 
-    street = listdir('/home/pi/Pictures/') #list image name insde 'Picture" folder
+    street = listdir('/home/pi/images/') #list image name insde "images" folder
     i=0 # setting i to be the counter referencing most recent picture
     while True:
         print("taking Image")
@@ -91,10 +93,10 @@ if __name__ == "__main__":
         #    tempLine = linecache.getline("/home/pi/test.txt",8)
         #    wittyPiTemp = float(tempLine[25:30])
         #    fout.close()
-        data = publish_data(currDate,currTime,water_stress_lv,client)
+        data = publish_data(client,currDate,currTime,water_stress_lv)
         hologram_commands.message_publish(hologram, data)
         with open('/home/pi/data.txt', 'a') as outfile:
             json.dump(data, outfile)
             outfile.write('\n')
         device_info = load_file('device')
-        sleep(device_info['statusInterval'])
+#        sleep(device_info['statusInterval'])

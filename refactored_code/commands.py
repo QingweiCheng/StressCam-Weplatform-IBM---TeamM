@@ -125,7 +125,7 @@ def change_frame_rate(frame_rate = image_info['imageFrameRate']):
     change_device_info.change_image_value(**frame_rate)
     print("Frame rate changed to:",frame_rate)
 
-def publish_data(currDate,currTime,waterStressLevel,client):
+def publish_data(client,currDate,currTime,waterStressLevel):
     device_info = change_device_info.read_device_value()
     cpu = CPUTemperature()
     data = {
@@ -138,6 +138,7 @@ def publish_data(currDate,currTime,waterStressLevel,client):
     "DATE_1":currDate,
     "TIME_1":currTime
     }
+    print(data)
     print("SensorData Published")
     # publish client event data using IBM Watson IoT PY SDK
     client.publishEvent("status","json", data)

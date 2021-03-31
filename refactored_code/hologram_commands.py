@@ -11,7 +11,7 @@ def network_disconnect():
     run("sudo hologram network disconnect", shell=True)
 
 def message_publish(hologram,data):
-    formatted_data  = json.dumps(data, seperator=(" ", ":"))
+    formatted_data = json.dumps(data, separators=(" ", ":"))
     recv=hologram.sendMessage(formatted_data)
     print("Recieved Code:", recv)
     print("0 Means Succesful Transmission")

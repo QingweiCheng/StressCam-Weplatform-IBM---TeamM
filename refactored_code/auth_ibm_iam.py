@@ -1,0 +1,2 @@
+from cloudant.client import Cloudant
+client = Cloudant.iam('crn:v1:bluemix:public:cloudantnosqldb:us-south:a/d4601d3d4e2d3f3a314374f221b69bc6:dc0d0b0e-00f8-4394-9487-6a24c3702f37::','aXM-Q7z8xZRS629WoDJUvTTS0sudyWteNws3Ga2E6Y1Y',connect=True)
