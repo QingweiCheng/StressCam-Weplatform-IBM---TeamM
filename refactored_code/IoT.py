@@ -11,8 +11,8 @@
 # http://www.eclipse.org/legal/epl-v10.html
 # *****************************************************************************
 from sys import path,exit
-path.append("/home/pi/.local/lib/python3.7/site-packages")
-path.append("/home/pi")
+path.insert(0,"/home/pi")
+path.insert(0,"/usr/local/lib/python3.7/dist-packages")
 from os import listdir
 from subprocess import Popen
 
@@ -27,6 +27,7 @@ from commands import capture_image, publish_data, load_file
 import hologram_commands 
 from commandProcessor import commandProcessor
 import tensor_flow_process
+import auth_ibm_iam
 #### Custom Modules ####
 
 
@@ -67,7 +68,7 @@ if __name__ == "__main__":
 
     client = None
     try:
-        client = DeviceClient(data['wiotp_info']) # create a client using preset values
+        client = DeviceClient(auth_ibm_iam.query_wiotp_info()) # create a client using preset values
         client.commandCallback = commandProcessor # set commandCallback to commandProcessor  
         client.connect() # Use MQTT connection to IBM Watson IoT Plateform for publishing events
     except Exception as e:         # store error message in 'e'
@@ -93,8 +94,8 @@ if __name__ == "__main__":
         #    tempLine = linecache.getline("/home/pi/test.txt",8)
         #    wittyPiTemp = float(tempLine[25:30])
         #    fout.close()
-        data = publish_data(client,currDate,currTime,water_stress_lv)
-        hologram_commands.message_publish(hologram, data)
+        camera_data = publish_data(client,currDate,currTime,water_stress_lv)
+        hologram_commands.message_publish(hologram, camera_data)
         with open('/home/pi/data.txt', 'a') as outfile:
             json.dump(data, outfile)
             outfile.write('\n')

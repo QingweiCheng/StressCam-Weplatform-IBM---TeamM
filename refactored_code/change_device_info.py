@@ -14,9 +14,9 @@ def read_device_value():
     device_info = data['device_info']
     return device_info
 
-def read_wiotp_info():
-    wiotp_info = data['wiotp_info']
-    return wiotp_info
+def read_ibm_info():
+    ibm_info = data['ibm_info']
+    return ibm_info
 
 #change device info
 def change_device_info(**kwargs):
@@ -31,11 +31,11 @@ def change_device_info(**kwargs):
     user_file.close()
 
 #change wiotp info
-def change_wiotp_info(**kwargs):
+def change_ibm_info(**kwargs):
     for keys in kwargs:
-        for key in data['wiotp_info']:
+        for key in data['ibm_info']:
            if keys == key:
-                data['wiotp_info'][key]= kwargs[keys]
+                data['ibm_info'][key]= kwargs[keys]
                 break
 
     with open('/home/pi/device_info.json','w') as user_file:

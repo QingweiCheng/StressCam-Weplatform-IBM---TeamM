@@ -12,7 +12,6 @@ import change_device_info
 ##import values from device_info file
 image_info = change_device_info.read_image_value()
 device_info = change_device_info.read_device_value()
-wiotp_info = change_device_info.read_wiotp_info()
 
 def load_file(*arg):
     print("Reading value")
@@ -23,9 +22,6 @@ def load_file(*arg):
         elif i == 'device':
             print("Reading device value")
             return change_device_info.read_device_value()
-        elif i == 'wiotp':
-            print("Reading wiotp value")
-            return change_device_info.read_wiotp_info()
 
 
 def capture_image(currDate, currTime):

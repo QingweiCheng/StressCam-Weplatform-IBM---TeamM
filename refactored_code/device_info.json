@@ -6,20 +6,9 @@
         "statusInterval" : 720   
     },
 
-    "wiotp_info":{
-        "identity":{
-            "orgId" : "k0avjn",
-            "typeId" : "camera",
-            "deviceId" : "0001"
-        },
-        "auth": {
-            "token" : "ConnectedFarms"
-        },
-        "options": {
-            "mqtt": {
-                "keepAlive":60
-            } 
-        }
+    "ibm_info":{
+	"username": "8361dd44-a5a6-4879-ad67-04465568b5b0-bluemix",
+	"api_key" : "aXM-Q7z8xZRS629WoDJUvTTS0sudyWteNws3Ga2E6Y1Y"
     },
 
     "image_value":{

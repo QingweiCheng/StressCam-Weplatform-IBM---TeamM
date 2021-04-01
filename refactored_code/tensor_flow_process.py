@@ -1,14 +1,13 @@
+from sys import path
+path.insert(0,"/usr/local/lib/python3.7/dist-packages/tensorflow_core/lite/python")
+path.insert(0,"/usr/local/lib/python3.7/dist-packages/skimages")
 from skimage.io import imread #read images
 from skimage.io import imsave
 from skimage.transform import resize #resize images
-from tensorflow import lite as tflite
+import lite as tflite
 import numpy as np #modify arrays
 #from keras.models import load_model # load pretrained models
 from time import sleep
-from sys import path
-path.append("/usr/local/lib/python3.7/dist-packages/tensorflow_core")
-path.append("/home/pi/.local/lib/python3.7/site-packages")
-path.append("/home/pi")
 
 def ml_process(street,i):
     #im = imread('/home/pi/images/'+currDate+currTime+imageFormat)
