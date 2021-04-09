@@ -1,0 +1,23 @@
+{
+    "device_info":{
+        "deviceId" : "0001",
+        "cameraLatitude" : "35.763886",
+        "cameraLongitude" : "-78.718038",
+        "statusInterval" : 720   
+    },
+
+    "ibm_info":{
+	"username": "8361dd44-a5a6-4879-ad67-04465568b5b0-bluemix",
+	"api_key" : "aXM-Q7z8xZRS629WoDJUvTTS0sudyWteNws3Ga2E6Y1Y"
+    },
+
+    "image_value":{
+        "imageWidth" : 640,
+        "imageHeight" : 480,
+        "imageResolutionX" : 2592,
+        "imageResolutionY" : 1944,
+        "imageFormat" : ".jpg",
+        "imageFrameRate" : 10
+    }
+
+}

@@ -1,0 +1,34 @@
+{
+    "device_info":{
+        "deviceId" : "0001",
+        "cameraLatitude" : "35.763886",
+        "cameraLongitude" : "-78.718038",
+        "statusInterval" : 720   
+    },
+
+    "wiotp_info":{
+        "identity":{
+            "orgId" : "5vbwmt",
+            "typeId" : "Camera",
+            "deviceId" : "0001"
+        },
+        "auth": {
+            "token" : "ConnectedFarms"
+        },
+        "options": {
+            "mqtt": {
+                "keepAlive":60
+            } 
+        }
+    },
+
+    "image_value":{
+        "imageWidth" : 640,
+        "imageHeight" : 480,
+        "imageResolutionX" : 2592,
+        "imageResolutionY" : 1944,
+        "imageFormat" : ".jpg",
+        "imageFrameRate" : 10
+    }
+
+}
