@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import datetime
 from os import listdir
 from sys import path
@@ -15,6 +16,17 @@ def commandProcessor(cmd):
     currTime=datetime.datetime.now().strftime("%H_%M_%S")
     # print recieved command
     print(f"Command received:{command}")
+=======
+import commands
+import datetime
+
+def commandProcessor(cmd):
+
+    command = cmd.data['CommandType']
+
+    # print recieved command
+    print("Command received: %s" % command)
+>>>>>>> 63b8a0f7526410bae2df477df37aaadcd2b71b35
 
    # if command is take image
     if command == "takeImage":
@@ -25,7 +37,11 @@ def commandProcessor(cmd):
     # if command is resize image
     if command == "resizeImage" and int(cmd.data['Height'])<=1944 and int(cmd.data['Width'])<=2592:
         commands.resize_image(int(cmd.data['Height']), int(cmd.data['Width']))
+<<<<<<< HEAD
     elif command == "resizeImage" and int(cmd.data['Height'])>1944 and int(cmd.data['Width'])>2592:
+=======
+    else:
+>>>>>>> 63b8a0f7526410bae2df477df37aaadcd2b71b35
         print("Images not resized, size too large")
 
     #if command is to change resolution
@@ -45,7 +61,11 @@ def commandProcessor(cmd):
     #if command is change schedule
     if(command == "changeSchedule"):
         print("changeSchedule")
+<<<<<<< HEAD
         commands.change_schedule(cmd.data['startTime'], cmd.data['endTime'])
+=======
+        commands.change_schedule(cmd.data['startTime'], cmd.data['endTime'])    
+>>>>>>> 63b8a0f7526410bae2df477df37aaadcd2b71b35
 
     # if command is image format
     if(command == "imageFormat"):
@@ -58,6 +78,7 @@ def commandProcessor(cmd):
         print("Frame Rate changed to:", int(cmd.data['frames']))#range(10fps-30fps)
 
     # if command is send data
+<<<<<<< HEAD
     if(command == "sendSensorData"):
         with open('/home/pi/data.txt','r') as f:
             data = f.read().splitlines()
@@ -65,3 +86,8 @@ def commandProcessor(cmd):
         f.close()
         client.publishEvent('status','json',json.loads(last_entry),qos=2)
         print('published 1 event')
+=======
+    if(command == "sendData"):
+        commands.publish_data()
+        
+>>>>>>> 63b8a0f7526410bae2df477df37aaadcd2b71b35
