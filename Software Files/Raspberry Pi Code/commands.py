@@ -1,6 +1,5 @@
 from picamera import PiCamera
 import datetime
-<<<<<<< HEAD
 from time import sleep
 from subprocess import run
 from gpiozero import CPUTemperature
@@ -24,36 +23,6 @@ def load_file(*arg): #argument(s) passed in here as a tuple
     return info #return info variable
 
 #This method will take image and save the image inside images folder
-=======
-import json
-import time
-from time import sleep
-from subprocess import run
-from gpiozero import CPUTemperature
-from wiotp.sdk.device import DeviceClient
-from random import randrange
-import change_device_info
-
-##import values from device_info file
-image_info = change_device_info.read_image_value()
-device_info = change_device_info.read_device_value()
-wiotp_info = change_device_info.read_wiotp_info()
-
-def load_file(*arg):
-    print("Reading value")
-    for i in arg:
-        if i == 'image':
-            print("Reading image value")
-            return change_device_info.read_image_value()
-        elif i == 'device':
-            print("Reading device value")
-            return change_device_info.read_device_value()
-        elif i == 'wiotp':
-            print("Reading wiotp value")
-            return change_device_info.read_wiotp_info()
-
-
->>>>>>> 63b8a0f7526410bae2df477df37aaadcd2b71b35
 def capture_image(currDate, currTime):
     image_info = change_device_info.read_image_value()
     print("Camera Opening")
@@ -71,34 +40,24 @@ def capture_image(currDate, currTime):
     sleep(5)
 
 
-<<<<<<< HEAD
 #This method will resize the image
-=======
->>>>>>> 63b8a0f7526410bae2df477df37aaadcd2b71b35
 def resize_image(height = image_info["imageHeight"], width = image_info["imageWidth"]):
     image_size = {
         "imageWidth" : width,
         "imageHeight" : height
     }
     change_device_info.change_image_value(**image_size)
-<<<<<<< HEAD
     print("Images Resized to", image_size["imageWidth"],"x", image_size["imageHeight"],"y")
 
 
 
 #This method will change the resolution the next image being taken 
-=======
-    print("Images Resized to", image_size["image_Width"],"x", image_size["image_Height"],"y")
-
-
->>>>>>> 63b8a0f7526410bae2df477df37aaadcd2b71b35
 def change_resolution(new_x_resolution = image_info['imageResolutionX'],new_y_resolution = image_info['imageResolutionY']):
     new_resolution={
     "imageResolutionX" : new_x_resolution,
     "imageResolutionY" : new_y_resolution
     }
     change_device_info.change_image_value(**new_resolution)
-<<<<<<< HEAD
     print("Resolution changed to:", new_resolution.get("imageResolutionX") ,"x", new_resolution.get("imageResolutionY") , "y") # set image resolution to the desire value pulled from web request's meta data
 
 
@@ -106,40 +65,22 @@ def change_resolution(new_x_resolution = image_info['imageResolutionX'],new_y_re
 def new_interval(interval = device_info["statusInterval"]):
     statusInterval = {
         "statusInterval":interval # convert received minute interval to seconds
-=======
-    print("Resolution changed to:", new_resolution.get("imageResolutionX") ,"x", new_resolution.get("imageResolytionY") , "y") # set image resolution to the desire value pulled from web request's meta data
-
-
-def new_interval(interval = device_info["statusInterval"]):
-    statusInterval = {
-        "interval":interval # convert received minute interval to seconds
->>>>>>> 63b8a0f7526410bae2df477df37aaadcd2b71b35
     }
     change_device_info.change_device_info(**statusInterval)
     print("Interval Changed to:", statusInterval,"seconds") # display interval value in seconds
 
 
-<<<<<<< HEAD
 #This method will run the desired script
-=======
->>>>>>> 63b8a0f7526410bae2df477df37aaadcd2b71b35
 def run_script(script_type):
         print("Running Script"+ script_type)
         #if script extendtion is '.py', then use python3, else use super-user linux command
         if(script_type[-2:]=='py'):
-<<<<<<< HEAD
             run(['python3', '/home/pi/'+ script_type])
         else:
             run(['sudo','sh', '/home/pi/'+ script_type])
 
 
 #This method will change camera operating schedule
-=======
-            run(['python3', '/home/pi'+ script_type])
-        else:
-            run(['sudo','sh', '/home/pi'+ script_type])
-
->>>>>>> 63b8a0f7526410bae2df477df37aaadcd2b71b35
 def change_schedule(start_time, end_time):
     startTime = datetime.datetime.strptime(start_time,"%H:%M") # parse start time
     endTime = datetime.datetime.strptime(end_time,"%H:%M") # parse end time
@@ -167,11 +108,8 @@ def change_schedule(start_time, end_time):
     f.write('OFF     H'+ str(offTimeHours)+ ' M' + str(offTimeMin))
     f.close
 
-<<<<<<< HEAD
 
 #This method will change the format of future image taken
-=======
->>>>>>> 63b8a0f7526410bae2df477df37aaadcd2b71b35
 def change_image_format(image_format = image_info['imageFormat']):
     new_image_format={
        "imageFormat":image_format
@@ -187,7 +125,6 @@ def change_image_format(image_format = image_info['imageFormat']):
         print("Incompatible format")
 
 
-<<<<<<< HEAD
 #This method will change the image frame rate
 def change_frame_rate(frame_rate = image_info['imageFrameRate']):
     new_frame_rate={
@@ -201,37 +138,18 @@ def change_frame_rate(frame_rate = image_info['imageFrameRate']):
 def publish_data(currDate, currTime, waterStressLevel,witty_temp =randrange(30,40) ):
     device_info = change_device_info.read_device_value()
     cpu = CPUTemperature()
-=======
-def change_frame_rate(frame_rate = image_info['imageFrameRate']):
-    change_device_info.change_image_value(**frame_rate)
-    print("Frame rate changed to:",frame_rate)
-
-def publish_data(currDate,currTime,waterStressLevel):
-    device_info = change_device_info.read_device_value()
-    cpu = CPUTemperature()
-    client = DeviceClient(load_file('wiotp'))
->>>>>>> 63b8a0f7526410bae2df477df37aaadcd2b71b35
     data = {
     "DEVICE_ID": device_info['deviceId'],
     "LATITUDE": device_info['cameraLatitude'],
     "LONGITUDE": device_info['cameraLongitude'],
     "WATER_STRESS_LEVEL":waterStressLevel,
-<<<<<<< HEAD
     "WITTYPI_TEMPERATURE": witty_temp, #wittyPiTemp,
-=======
-    "WITTYPI_TEMPERATURE": randrange(30,40), #wittyPiTemp,
->>>>>>> 63b8a0f7526410bae2df477df37aaadcd2b71b35
     "CPU_TEMPERATURE": cpu.temperature,
     "DATE_1":currDate,
     "TIME_1":currTime
     }
     print(data)
     print("SensorData Published")
-<<<<<<< HEAD
-=======
-    # publish client event data using IBM Watson IoT PY SDK
-    client.publishEvent("status","json", data)
->>>>>>> 63b8a0f7526410bae2df477df37aaadcd2b71b35
     return data
 
 
